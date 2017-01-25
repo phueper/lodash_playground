@@ -8,16 +8,23 @@ testFn = function(v) {
   return v != null ? v : ''
 }
 
-suite.add('fn', function () {
+suite
+  .add('fn', function () {
   let v = Math.random();
+  if (v > 0.5)
+    v = null
   testFn(v)
-})
+  })
   .add('defaultTo', function () {
     let v = Math.random();
+    if (v > 0.5)
+      v = null
     lodashfp.defaultTo('', v)
   })
   .add('defaultTo curried', function () {
     let v = Math.random();
+    if (v > 0.5)
+      v = null
     lodashfp.defaultTo('')(v)
   })
   // add listeners
