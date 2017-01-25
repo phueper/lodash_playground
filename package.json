@@ -4,15 +4,15 @@
   "description": "",
   "main": "benchmark.js",
   "scripts": {
-    "test": "npm run defaultTo; npm run cond",
+    "test": "npm run defaultTo; npm run cond; npm run eq",
     "defaultTo": "node benchmark_defaultTo.js",
-    "cond": "node benchmark_cond.js"
+    "cond": "node benchmark_cond.js",
+    "eq": "node benchmark_eq.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "benchmark": "^2.1.2",
-    "benchmarkjs": "^0.1.8",
-    "microtime": "^2.1.2"
+    "benchmarkjs": "^0.1.8"
   }
 }
