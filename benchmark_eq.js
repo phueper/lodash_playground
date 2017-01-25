@@ -3,9 +3,6 @@ var lodashfp = require('lodash/fp')
 
 var suite = new Benchmark.Suite;
 
-const directionIsUpFn = direction => direction === 'up'
-const directionIsUpLodash = lodashfp.matches({direction: 'up'})
-
 testFn = function(v) {
   return v === 0.5
 }
