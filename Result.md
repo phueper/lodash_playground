@@ -40,18 +40,6 @@ lodash **eq with curry** about **535 times slower**
      Fastest is fn
 
 #### node benchmark_includes.js
-     
-lodash **eq** about **31 times slower**
-
-lodash **eq with curry** about **535 times slower**
-     
-     fn x 11,917 ops/sec ±0.91% (86 runs sampled)
-     lodash x 1,002,000 ops/sec ±1.09% (87 runs sampled)
-     lodash curried x 96,738 ops/sec ±1.92% (83 runs sampled)
-     fn2 x 12,226 ops/sec ±0.78% (85 runs sampled)
-     Fastest is lodash
-
-#### node benchmark_includes.js
 
 lodash **lodash.includes** about **2 times slower**
 
