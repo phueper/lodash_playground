@@ -4,11 +4,12 @@
   "description": "",
   "main": "benchmark.js",
   "scripts": {
-    "test": "npm run defaultTo; npm run cond; npm run eq; npm run includes",
+    "test": "npm run defaultTo; npm run cond; npm run eq; npm run includes; npm run flow",
     "defaultTo": "node benchmark_defaultTo.js",
     "cond": "node benchmark_cond.js",
     "eq": "node benchmark_eq.js",
-    "includes": "node benchmark_includes.js"
+    "includes": "node benchmark_includes.js",
+    "flow": "node benchmark_flow.js"
   },
   "author": "",
   "license": "ISC",

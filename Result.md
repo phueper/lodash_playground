@@ -64,3 +64,11 @@ lodash **lodash.includes with curry** about **50 times slower**
      fn includes x 309,131 ops/sec ±0.72% (86 runs sampled)
      fn indexOf x 4,725,067 ops/sec ±0.80% (85 runs sampled)
      Fastest is fn indexOf
+
+#### node benchmark_flow.js
+ 
+lodash **lodash.flow** about **2.5 times slower**
+    
+     fn x 84,038,948 ops/sec ±1.54% (83 runs sampled)
+     lodash x 32,125,324 ops/sec ±1.01% (84 runs sampled)
+     Fastest is fn
