@@ -3,8 +3,12 @@ var lodashfp = require('lodash/fp')
 
 var suite = new Benchmark.Suite;
 
-testFn = function(a, v) {
+testFnIncludes = function(a, v) {
   return a.includes(v)
+}
+
+testFnIndexOf = function(a, v) {
+    return a.indexOf(v) >= 0
 }
 
 const range = 10000
@@ -19,18 +23,20 @@ function generateValue() {
 // add tests
 const a = prepareArray()
 const v = generateValue()
-suite.add('fn', function () {
-  testFn(a, v)
-})
+suite
+  .add('fn includes', function () {
+      testFnIncludes(a, v)
+  })
+  .add('fn indexOf', function () {
+      testFnIndexOf(a, v)
+  })
   .add('lodash', function () {
     lodashfp.includes(a, v)
   })
   .add('lodash curried', function () {
     lodashfp.includes(a)(v)
   })
-  .add('fn2', function () {
-    testFn(a, v)
-  })// add listeners
+  // add listeners
   .on('cycle', function (event) {
     console.log(String(event.target));
   })
