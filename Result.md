@@ -47,11 +47,11 @@ lodash **node6.native.includes** about **15 times slower**
 
 lodash **lodash.includes with curry** about **15 times slower**
 
-     lodash x 984,460 ops/sec ±0.83% (85 runs sampled)
-     lodash curried x 93,686 ops/sec ±1.74% (80 runs sampled)
-     fn includes x 309,131 ops/sec ±0.72% (86 runs sampled)
-     fn indexOf x 4,725,067 ops/sec ±0.80% (85 runs sampled)
-     Fastest is fn indexOf
+    fn includes x 103,648 ops/sec ±0.71% (85 runs sampled)
+    fn indexOf x 1,691,323 ops/sec ±0.76% (85 runs sampled)
+    lodash x 879,447 ops/sec ±1.31% (84 runs sampled)
+    lodash curried x 93,055 ops/sec ±1.30% (86 runs sampled)
+    Fastest is fn indexOf
 
 _Result varies with size and content of the array_      
      
