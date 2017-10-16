@@ -11,7 +11,7 @@ testFnIndexOf = function(a, v) {
     return a.indexOf(v) >= 0
 }
 
-const range = 10000
+const range = 1000
 function prepareArray() {
   let a = lodashfp.range(0, range);
   return a
