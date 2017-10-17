@@ -22,19 +22,19 @@ function generateValue() {
 }
 // add tests
 const a = prepareArray()
-const v = generateValue()
+// const v = generateValue()
 suite
   .add('fn includes', function () {
-      testFnIncludes(a, v)
+      testFnIncludes(a, generateValue())
   })
   .add('fn indexOf', function () {
-      testFnIndexOf(a, v)
+      testFnIndexOf(a, generateValue())
   })
   .add('lodash', function () {
-    lodashfp.includes(a, v)
+    lodashfp.includes(a, generateValue())
   })
   .add('lodash curried', function () {
-    lodashfp.includes(a)(v)
+    lodashfp.includes(a)(generateValue())
   })
   // add listeners
   .on('cycle', function (event) {
