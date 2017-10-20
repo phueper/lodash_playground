@@ -41,7 +41,7 @@ lodash **eq with curry** about **535 times slower**
 
 #### node benchmark_includes.js
 
-lodash **lodash.includes** about **3 times slower**
+lodash **lodash.includes** about **3 times slower** then native.indexOf
 
 lodash **node6.native.includes** about **16 times slower**
 
@@ -54,6 +54,10 @@ lodash **lodash.includes with curry** about **30 times slower**
     Fastest is fn indexOf
 
 _Result varies with size and content of the array_      
+
+In Chrome/ Firefox there is almost no difference between 
+native includes, idexOf and lodash includes, 
+see https://jsperf.com/includes-vx-indexof      
      
 #### node benchmark_flow.js
  
