@@ -5,7 +5,6 @@ const lodashfp = require('lodash/fp')
 const lodash = require('lodash')
 const Immutable = require('immutable')
 const assert = require('assert')
-const deepFreeze = require('deep-freeze-strict')
 const beautifyBenchmark = require('beautify-benchmark')
 
 const value = Math.random()
@@ -38,10 +37,9 @@ const createPath = () => {
 
 console.log('Setup...', levels, propsPerLevel)
 const deepObject = createDeepObject()
-console.log('Setup frozen...')
-const deepObjectFrozen = deepFreeze(Object.assign({}, deepObject))
 console.log('Setup Immutable...')
 const deepObjectImmutable = Immutable.fromJS(deepObject)
+console.log('Setup done')
 
 // console.log(JSON.stringify(deepObject, null, 4))
 // console.log(JSON.stringify(createPath(), null, 4))
@@ -50,56 +48,20 @@ const path = createPath()
 
 // add tests
 new Benchmark.Suite()
-  .add('native get/access', function () {
-    let val = deepObject;
-    let index = 0
-    while (index < path.length) {
-      val = val[path[index++]]
-    }
+  .add('lodash set', function () {
+    const val = lodash.set(deepObject, path, 0)
     assert(val, value)
   })
-  .add('native get/access frozen', function () {
-    let val = deepObjectFrozen;
-    let index = 0
-    while (index < path.length) {
-      val = val[path[index++]]
-    }
+  .add('lodashfp set', function () {
+    const val = lodashfp.set(path, deepObject, 0)
     assert(val, value)
   })
-  .add('native reduce', function () {
-    const val = path.reduce((currentValue, currentPath) => {
-      return currentValue[currentPath]
-    }, deepObject);
+  .add('lodashfp set curried', function () {
+    const val = lodashfp.set(path)(deepObject)(0)
     assert(val, value)
   })
-  .add('native reduce frozen', function () {
-    const val = path.reduce((currentValue, currentPath) => {
-      return currentValue[currentPath]
-    }, deepObjectFrozen);
-    assert(val, value)
-  })
-  .add('lodash get', function () {
-    const val = lodash.get(deepObject, path)
-    assert(val, value)
-  })
-  .add('lodash get frozen', function () {
-    const val = lodash.get(deepObjectFrozen, path)
-    assert(val, value)
-  })
-  .add('lodashfp get', function () {
-    const val = lodashfp.get(path, deepObject)
-    assert(val, value)
-  })
-  .add('lodashfp get curried', function () {
-    const val = lodashfp.get(path)(deepObject)
-    assert(val, value)
-  })
-  .add('lodashfp get frozen', function () {
-    const val = lodashfp.get(path, deepObjectFrozen)
-    assert(val, value)
-  })
-  .add('Immutable getIn', function () {
-    const val = deepObjectImmutable.getIn(path)
+  .add('Immutable setIn', function () {
+    const val = deepObjectImmutable.setIn(path, 0)
     assert(val, value)
   })
   // add listeners

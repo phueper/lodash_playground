@@ -4,13 +4,15 @@
   "description": "",
   "main": "benchmark.js",
   "scripts": {
-    "test": "npm run defaultTo; npm run cond; npm run eq; npm run includes; npm run flow; npm run getIn",
+    "test": "npm run defaultTo; npm run cond; npm run eq; npm run includes; npm run flow; npm run getIn; npm run setIn; npm run clone",
     "defaultTo": "node benchmark_defaultTo.js",
     "cond": "node benchmark_cond.js",
     "eq": "node benchmark_eq.js",
     "includes": "node benchmark_includes.js",
     "flow": "node benchmark_flow.js",
-    "getIn": "node benchmark_getIn.js"
+    "getIn": "node benchmark_getIn.js",
+    "setIn": "node benchmark_setIn.js",
+    "clone": "node benchmark_clone.js"
   },
   "author": "",
   "license": "ISC",
