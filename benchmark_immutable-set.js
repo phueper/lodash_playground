@@ -62,7 +62,6 @@ new Benchmark.Suite()
         console.log('Starting tests...');
     })
     .on('cycle', function (event) {
-        console.log(String(event.target));
         beautifyBenchmark.add(event.target);
     })
     .on('complete', function () {
