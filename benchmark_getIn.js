@@ -56,7 +56,7 @@ new Benchmark.Suite()
     while (index < path.length) {
       val = val[path[index++]]
     }
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('native get/access frozen', function () {
     let val = deepObjectFrozen;
@@ -64,43 +64,43 @@ new Benchmark.Suite()
     while (index < path.length) {
       val = val[path[index++]]
     }
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('native reduce', function () {
     const val = path.reduce((currentValue, currentPath) => {
       return currentValue[currentPath]
     }, deepObject);
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('native reduce frozen', function () {
     const val = path.reduce((currentValue, currentPath) => {
       return currentValue[currentPath]
     }, deepObjectFrozen);
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('lodash get', function () {
     const val = lodash.get(deepObject, path)
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('lodash get frozen', function () {
     const val = lodash.get(deepObjectFrozen, path)
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('lodashfp get', function () {
     const val = lodashfp.get(path, deepObject)
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('lodashfp get curried', function () {
     const val = lodashfp.get(path)(deepObject)
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('lodashfp get frozen', function () {
     const val = lodashfp.get(path, deepObjectFrozen)
-    assert(val, value)
+    assert.equal(val, value)
   })
   .add('Immutable getIn', function () {
     const val = deepObjectImmutable.getIn(path)
-    assert(val, value)
+    assert.equal(val, value)
   })
   // add listeners
   .on('start', function () {
