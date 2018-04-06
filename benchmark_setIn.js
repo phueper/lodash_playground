@@ -50,26 +50,25 @@ const path = createPath()
 new Benchmark.Suite()
   .add('lodash set', function () {
     const val = lodash.set(deepObject, path, 0)
-    assert(val, value)
+    assert.equal(lodash.get(val, path), 0)
   })
   .add('lodashfp set', function () {
-    const val = lodashfp.set(path, deepObject, 0)
-    assert(val, value)
+    const val = lodashfp.set(path, 0, deepObject)
+    assert.equal(lodash.get(val, path), 0)
   })
   .add('lodashfp set curried', function () {
-    const val = lodashfp.set(path)(deepObject)(0)
-    assert(val, value)
+    const val = lodashfp.set(path)(0)(deepObject)
+    assert.equal(lodash.get(val, path), 0)
   })
   .add('Immutable setIn', function () {
     const val = deepObjectImmutable.setIn(path, 0)
-    assert(val, value)
+    assert.equal(val.getIn(path), 0)
   })
   // add listeners
   .on('start', function () {
     console.log('Starting tests...');
   })
   .on('cycle', function (event) {
-    // console.log(String(event.target));
     beautifyBenchmark.add(event.target);
   })
   .on('complete', function () {
