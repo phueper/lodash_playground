@@ -12,7 +12,8 @@
     "flow": "node benchmark_flow.js",
     "getIn": "node benchmark_getIn.js",
     "setIn": "node benchmark_setIn.js",
-    "clone": "node benchmark_clone.js"
+    "clone": "node benchmark_clone.js",
+    "immutable-set": "node benchmark_immutable-set"
   },
   "author": "",
   "license": "ISC",
