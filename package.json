@@ -13,7 +13,8 @@
     "getIn": "node benchmark_getIn.js",
     "setIn": "node benchmark_setIn.js",
     "clone": "node benchmark_clone.js",
-    "immutable-set": "node benchmark_immutable-set"
+    "immutable-set": "node benchmark_immutable-set",
+    "borders": "node benchmark_borders"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.2",
     "benchmarkjs": "^0.1.8",
+    "borders": "^2.0.0",
     "deep-freeze-strict": "^1.1.1",
     "immutable": "^3.8.2"
   }
