@@ -19,7 +19,8 @@ const bordersContext = new Context()
     FUNC: (index) => {
       // console.log('in backend', index);
       return value[index]
-    }
+    },
+    NOOP: () => {},
   })
 
 // add tests
@@ -34,30 +35,96 @@ new Benchmark.Suite()
     }
     // console.log('generator returned', val)
   })
-  .add('function through borders',
-    {
-      defer: true,
-      fn: function (deferred) {
-        const execute = bordersContext.execute(function* run() {
-          const val = []
-          for (let i = 0; i < value.length; i += 1) {
-            val.push(yield { type: 'FUNC', payload: i })
-          }
-          return val
-        }())
-        execute.then(
-          (v) => {
-            // console.log('execute resolved', v)
-            deferred.resolve()
-          },
-          (e) => {
-            console.log('execute rejected', e)
-            deferred.resolve()
-          }
-        )
-      }
-    })
-  // add listeners
+    .add('plain generator executed in borders context',
+        {
+            defer: true,
+            fn: function (deferred) {
+                const execute = bordersContext.execute(function* run() {
+                    const gen = generatorFunc()
+                    let genValue = gen.next()
+                    const val = []
+                    while (!genValue.done) {
+                        val.push(genValue.value)
+                        genValue = gen.next()
+                    }
+                    return val
+                }())
+                execute.then(
+                    (v) => {
+                        // console.log('execute resolved', v)
+                        deferred.resolve()
+                    },
+                    (e) => {
+                        console.log('execute rejected', e)
+                        deferred.resolve()
+                    }
+                )
+            }
+        })
+    .add('plain noop executed in borders context',
+        {
+            defer: true,
+            fn: function (deferred) {
+                const execute = bordersContext.execute(function* run() {}())
+                execute.then(
+                    (v) => {
+                        // console.log('execute resolved', v)
+                        deferred.resolve()
+                    },
+                    (e) => {
+                        console.log('execute rejected', e)
+                        deferred.resolve()
+                    }
+                )
+            }
+        })
+    .add('function through borders',
+        {
+            defer: true,
+            fn: function (deferred) {
+                const execute = bordersContext.execute(function* run() {
+                    const val = []
+                    for (let i = 0; i < value.length; i += 1) {
+                        val.push(yield { type: 'FUNC', payload: i })
+                    }
+                    return val
+                }())
+                execute.then(
+                    (v) => {
+                        // console.log('execute resolved', v)
+                        deferred.resolve()
+                    },
+                    (e) => {
+                        console.log('execute rejected', e)
+                        deferred.resolve()
+                    }
+                )
+            }
+        })
+    .add('noop through borders',
+        {
+            defer: true,
+            fn: function (deferred) {
+                const execute = bordersContext.execute(function* run() {
+                    const val = []
+                    for (let i = 0; i < value.length; i += 1) {
+                        yield { type: 'NOOP' }
+                    }
+                    return val
+                }())
+                execute.then(
+                    (v) => {
+                        // console.log('execute resolved', v)
+                        deferred.resolve()
+                    },
+                    (e) => {
+                        console.log('execute rejected', e)
+                        deferred.resolve()
+                    }
+                )
+            }
+        })
+    // add listeners
   .on('start', function () {
     console.log('Starting tests...');
   })
