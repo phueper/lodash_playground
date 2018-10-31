@@ -35,6 +35,32 @@ new Benchmark.Suite()
     }
     // console.log('generator returned', val)
   })
+  .add('plain generator function through promise', {
+    defer: true,
+    fn: function (deferred) {
+      const promise = new Promise((resolve, reject) => {
+        const gen = generatorFunc()
+        let genValue = gen.next()
+        const val = []
+        while (!genValue.done) {
+          val.push(genValue.value)
+          genValue = gen.next()
+        }
+        // console.log('generator returned', val)
+        resolve();
+      })
+      promise.then(
+        (v) => {
+          // console.log('promise resolved', v)
+          deferred.resolve()
+        },
+        (e) => {
+          console.log('promise rejected', e)
+          deferred.resolve()
+        }
+      )
+    }
+  })
     .add('plain generator executed in borders context',
         {
             defer: true,
