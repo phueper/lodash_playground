@@ -8,8 +8,16 @@ const Context = require('borders').default;
 
 const value = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+// yuck... sync sleep :/ ... makes simulating "blocking IO" simple
+const { usleep } = require('sleep')
+const IO_SLEEP_MS=0.001
+const performIo = () => {
+  usleep(IO_SLEEP_MS * 1000)
+}
+
 function* generatorFunc() {
   for (let i = 0; i < value.length; i += 1) {
+    performIo()
     yield value[i]
   }
 }
@@ -18,9 +26,10 @@ const bordersContext = new Context()
   .use({
     FUNC: (index) => {
       // console.log('in backend', index);
+      performIo()
       return value[index]
     },
-    NOOP: () => {},
+    NOOP: () => {performIo()},
   })
 
 // add tests
@@ -91,7 +100,7 @@ new Benchmark.Suite()
         {
             defer: true,
             fn: function (deferred) {
-                const execute = bordersContext.execute(function* run() {}())
+                const execute = bordersContext.execute(function* run() {performIo()}())
                 execute.then(
                     (v) => {
                         // console.log('execute resolved', v)
@@ -157,6 +166,9 @@ new Benchmark.Suite()
   .on('cycle', function (event) {
     // console.log(String(event.target));
     beautifyBenchmark.add(event.target);
+  })
+  .on('error', function (event) {
+    console.log('Benchmark error:', event);
   })
   .on('complete', function () {
     beautifyBenchmark.log()

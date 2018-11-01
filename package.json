@@ -24,6 +24,7 @@
     "benchmarkjs": "^0.1.8",
     "borders": "^2.0.0",
     "deep-freeze-strict": "^1.1.1",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "sleep": "^5.2.3"
   }
 }
