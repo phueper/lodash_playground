@@ -23,8 +23,13 @@
     "benchmark": "^2.1.2",
     "benchmarkjs": "^0.1.8",
     "borders": "^2.0.0",
+    "borders-couchbase-client": "^2.0.0-beta.11",
+    "borders-key-value": "^3.1.0",
+    "couchbase": "^2.6.0",
     "deep-freeze-strict": "^1.1.1",
     "immutable": "^3.8.2",
-    "sleep": "^5.2.3"
+    "sleep": "^5.2.3",
+    "superagent": "^4.0.0-beta.5",
+    "thenify": "^3.3.0"
   }
 }
